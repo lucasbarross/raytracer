@@ -1,3 +1,6 @@
+#ifndef VEC3_H
+#define VEC3_H
+
 #include <vector>
 
 using namespace std;
@@ -16,3 +19,5 @@ class Vec3{
 		Vec3 vectprod(Vec3& b);
 		Vec3 scale(double k);
 };
+
+#endif

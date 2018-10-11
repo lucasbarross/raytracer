@@ -1,3 +1,7 @@
+#ifndef IMAGE_H
+#define IMAGE_H
+
+
 #include <vector>
 #include <string>
 #include "Vec3.h"
@@ -11,7 +15,9 @@ class Image {
 	public:
 		Image(int width, int height);
 		
-		void SetPixel(int x, int y, const Vec3& color);
+		void setPixel(int x, int y, const Vec3& color);
 		
-		void SaveAsPBM(const string& filePath) const;
+		void saveAsPBM();
 };
+
+#endif

@@ -1,4 +1,5 @@
 #include "Image.h"
+#include "Vec3.cpp"
 #include <vector>
 
 using namespace std;    
@@ -16,13 +17,18 @@ Image::Image(int width, int height){
     }
 };
 
-void Image::SetPixel(int x, int y, const Vec3& color){
+void Image::setPixel(int x, int y, const Vec3& color){
     this->buffer[x][y] = color;
 };
 
-void Image::SaveAsPBM(const string& filePath) const{
-    // FILE *f = fopen("image.ppm", "w");         // Write image to PPM file. 
-    // fprintf(f, "P3\n%d %d\n%d\n", w, h, 255); 
-    // for (int i=0; i<w*h; i++) 
-    //     fprintf(f,"%d %d %d ", toInt(c[i].x), toInt(c[i].y), toInt(c[i].z)); 
+void Image::saveAsPBM(){
+    FILE *f = fopen("image.ppm", "w");
+    fprintf(f, "P3\n%d %d\n%d\n", this->width, this->height, 255); 
+    for (int i=0; i< this->height; i++) {
+        for (int j=0; j < this->width; j++) {
+            std::vector<double> aux = this->buffer[i][j].getCoords();
+            fprintf(f,"%d %d %d ", (int) aux[0], (int) aux[1], (int) aux[2]); 
+        }
+        
+    } 
 };

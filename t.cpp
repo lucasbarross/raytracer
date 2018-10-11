@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "Image.h"
+#include "Image.cpp"
 #include <bits/stdc++.h>
 
 //#include "Ray.h"
@@ -21,6 +21,46 @@ using namespace std;
 // }
 
 int main(){
-	Image* teste = new Image(100, 100);
-	cout << "dale daleeee";
+	Image* teste = new Image(1000, 1000);
+	const Vec3 vec1(255, 0, 0);
+	const Vec3 vec2(0, 255, 0);
+	const Vec3 vec3(0, 0, 255);
+	const Vec3 vec4(255, 255, 0);
+
+
+	for (int i = 0; i < 250; ++i)
+	{
+		for (int j = 0; j <  1000; ++j)
+		{
+			teste->setPixel(i, j, vec1);
+		}
+	}
+
+
+	for (int i = 0; i < 250; ++i)
+	{
+		for (int j = 0; j <  1000; ++j)
+		{
+			teste->setPixel(250 + i, j, vec2);
+		}
+	}
+
+	for (int i = 0; i < 250; ++i)
+	{
+		for (int j = 0; j <  1000; ++j)
+		{
+			teste->setPixel(500 + i, j, vec3);
+		}
+	}
+
+	for (int i = 0; i < 250; ++i)
+	{
+		for (int j = 0; j <  1000; ++j)
+		{
+			teste->setPixel(750 + i, j, vec4);
+		}
+	}
+
+
+	teste->saveAsPBM();
 }
