@@ -1,2 +1,9 @@
-*.exe
-.ppm
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.cpp
+!*.h
+
+# Unignore all dirs
+!*/
