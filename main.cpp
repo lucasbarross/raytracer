@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Vec3.h"
-#include "Image.h"
-#include "Ray.h"
-#include "Camera.h"
+#include "Vec3/Vec3.h"
+#include "Image/Image.h"
+#include "Ray/Ray.h"
+#include "Camera/Camera.h"
 
 #include <vector>
 #include <bits/stdc++.h>
