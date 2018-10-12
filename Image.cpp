@@ -1,6 +1,5 @@
-#include "Image.h"
-#include "Vec3.cpp"
 #include <vector>
+#include "Image.h"
 
 using namespace std;    
 

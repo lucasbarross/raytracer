@@ -4,7 +4,6 @@
 
 #include <vector>
 #include <string>
-#include "Vec3.h"
 
 using namespace std;
 
@@ -19,5 +18,7 @@ class Image {
 		
 		void saveAsPBM();
 };
+
+#include "Image.cpp"
 
 #endif

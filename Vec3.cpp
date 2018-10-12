@@ -1,25 +1,20 @@
-#include "Vec3.h"
-
-using namespace std;
-
 Vec3::Vec3(double x, double y, double z){
     this->x = x;
     this->y = y;
     this->z = z;
 };
 
+Vec3::Vec3() {
+    this->x = 0;
+    this->y = 0;
+    this->z = 0;
+}
+
 Vec3 Vec3::operator+(Vec3& b){
     vector<double> a = this->getCoords();
     vector<double> bc = b.getCoords();
     Vec3 v(a[0] + bc[0], a[1] + bc[1], a[2] + bc[2]);
     return v;
-}
-
-double Vec3::operator*(Vec3& b){
-    vector<double> a = this->getCoords();
-    vector<double> bc = b.getCoords();
-    double pe = a[0] * bc[0] + a[1] * bc[1] + a[2] * bc[2];
-    return pe;
 }
 
 Vec3 Vec3::operator-(Vec3& b){
@@ -35,11 +30,31 @@ Vec3 Vec3::scale(double k){
     return v;
 }
 
-Vec3 Vec3::vectprod(Vec3& b){
+double Vec3::dotProd(Vec3& b){
+    vector<double> a = this->getCoords();
+    vector<double> bc = b.getCoords();
+    double pe = a[0] * bc[0] + a[1] * bc[1] + a[2] * bc[2];
+    return pe;
+}
+
+Vec3 Vec3::crossProd(Vec3& b){
     vector<double> a = this->getCoords();
     vector<double> bc = b.getCoords();
     Vec3 v = Vec3(a[1]*bc[2] - a[2] * bc[1], a[2] * bc[0] - a[0] * bc[2], a[0] * bc[1] - a[1] * bc[0]);
     return v;
+}
+
+Vec3 Vec3::invert() {
+    return Vec3(-this->x, -this->y, -this->z);
+}
+
+double Vec3::magnitude() {
+    return sqrt((this->x * this->x) + (this->y * this->y) + (this->z * this->z));
+}
+
+Vec3 Vec3::normalize() {
+    double magnitude = this->magnitude();
+    return Vec3(this->x/magnitude, this->y/magnitude, this->z/magnitude);
 }
 
 vector<double> Vec3::getCoords(){
@@ -50,4 +65,20 @@ vector<double> Vec3::getCoords(){
     coords.push_back(this->z);
 
     return coords;
+}
+
+double Vec3::getX() {
+    return this->x;
+}
+
+double Vec3::getY() {
+    return this->y;
+}
+
+double Vec3::getZ() {
+    return this->z;
+}
+
+void Vec3::print() {
+    cout << "(" << this->x << ", " << this->y << ", " << this->z << ")" << endl;
 }
