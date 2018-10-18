@@ -28,6 +28,7 @@ class Vec3{
 		Vec3 scale(double k);
 		Vec3 normalize();
 		Vec3 invert();
+		Vec3 transformVec(vector<vector<double>> a);
 };
 
 #include "Vec3.cpp"

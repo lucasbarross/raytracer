@@ -67,6 +67,14 @@ vector<double> Vec3::getCoords(){
     return coords;
 }
 
+Vec3 Vec3::transformVec(vector<vector<double>> a) {
+    vector<double> coords;
+    for(int i = 0; i < a.size(); i++)
+        coords.push_back((a[i][0] * this->x) + (a[i][1] * this->y) + (a[i][2] * this->z));
+    
+    return Vec3(coords[0], coords[1], coords[2]);
+}
+
 double Vec3::getX() {
     return this->x;
 }
