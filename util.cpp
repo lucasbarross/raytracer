@@ -1,5 +1,7 @@
-vector<vector<double>> matrixMult(vector<vector<double>> a, vector<vector<double>> b) {
-    vector<vector<double>> mult;
+using namespace std;
+
+vector<vector<double> > matrixMult(vector<vector<double> > a, vector<vector<double> > b) {
+    vector<vector<double> > mult;
     
     if (a[0].size() != b.size()) {
         cout << "Matrizes de tamanho inválido";

@@ -15,5 +15,4 @@ class Object {
         Object(Geometry* geometry, Material* material);
 
         bool intersect (const Ray& r, ObjectIntersection* info = nullptr);
-
 }
