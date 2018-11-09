@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Vec3.h"
-#include "Ray.h"
-#include "ObjectIntersection.h"
+// #include "Vec3.h"
+// #include "Ray.h"
+// #include "ObjectIntersection.h"
 #include <cmath>
 
 using namespace std;
 
 class Geometry {
     public:
-        virtual bool intersect(const Ray& r, ObjectIntersection* info = nullptr) const; 
+        virtual bool intersect(const Ray& r, ObjectIntersection* info); 
         //Retorna um ponto do objeto para ser usado como fonte de luz.
-        virtual Vec3 getPoint() const = 0;
+        virtual Vec3 getPoint();
 }
 
 class Sphere : public Geometry {
@@ -21,6 +21,8 @@ class Sphere : public Geometry {
 
     public: 
         Sphere(Vec3 center, double radius);
-        bool intersect(const Ray& r, ObjectIntersection* info = nullptr) const;
-        Vec3 getPoint() const override;
+        bool intersect(Ray& r, ObjectIntersection* info);
+        Vec3 getPoint() override;
 }
+
+#include "Sphere.cpp"

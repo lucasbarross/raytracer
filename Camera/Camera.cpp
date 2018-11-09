@@ -11,20 +11,20 @@ Camera::Camera(Vec3 position, Vec3 target, Vec3 up, double fov, double near){
 
 
 // Retorna o raio da camera para a posição x e y da imagem em coordenadas de mundo
-Ray Camera::getRay(double x, double y, int width, int height) const {
+Ray Camera::getRay(double x, double y, int width, int height) {
 	Vec3 origin = this->position;
 	
 	double aspectRatio = width/(double)height;
 	double viewPlaneHalfWidth= tan(this->fov/2);
 	double viewPlaneHalfHeight = aspectRatio*viewPlaneHalfWidth;
-	Vec3 lookAtPoint = this->position + (this->axisZ * this->near);
+	Vec3 lookAtPoint = this->position + this->axisZ.scale(this->near);
 
-	Vec3 viewPlaneBottomLeftPoint = lookAtPoint - this->axisY*viewPlaneHalfHeight - this->axisX*viewPlaneHalfWidth;
+	Vec3 viewPlaneBottomLeftPoint = lookAtPoint - this->axisY.scale(viewPlaneHalfHeight) - this->axisX.scale(viewPlaneHalfWidth);
     
-	xIncVect = (this->axisX*2*halfWidth)/width;
-	yIncVect = (this->axisY*2*halfHeight)/height;
+	xIncVect = this->axisX.scale(2*halfWidth/width);
+	yIncVect = this->axisY.scale(2*halfHeight/height);
 
-	Vec3 direction = viewPlaneBottomLeftPoint + (x * xIncVect) + (y * yIncVect);
+	Vec3 direction = viewPlaneBottomLeftPoint + (xIncVect.scale(x)) + (yIncVect.scale(y));
 	
 	Ray r(this->position, direction);
 	return r;
