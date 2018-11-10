@@ -9,10 +9,10 @@ using namespace std;
 
 class Geometry {
     public:
-        virtual bool intersect(const Ray& r, ObjectIntersection* info); 
+        virtual bool intersect(Ray& r, ObjectIntersection* info) = 0; 
         //Retorna um ponto do objeto para ser usado como fonte de luz.
-        virtual Vec3 getPoint();
-}
+        virtual Vec3 getPoint() = 0;
+};
 
 class Sphere : public Geometry {
     private:
@@ -23,6 +23,6 @@ class Sphere : public Geometry {
         Sphere(Vec3 center, double radius);
         bool intersect(Ray& r, ObjectIntersection* info);
         Vec3 getPoint() override;
-}
+};
 
 #include "Sphere.cpp"

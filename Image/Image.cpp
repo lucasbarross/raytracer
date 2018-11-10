@@ -22,7 +22,7 @@ void Image::setPixel(int x, int y, const Vec3& color){
 
 void Image::saveAsPBM(){
     FILE *f = fopen("image.ppm", "w");
-    fprintf(f, "P3\n%d %d\n%d\n", this->width, this->height, 1); 
+    fprintf(f, "P3\n%d %d\n%d\n", this->width, this->height, 255); 
     for (int i=0; i< this->height; i++) {
         for (int j=0; j < this->width; j++) {
             std::vector<double> aux = this->buffer[i][j].getCoords();

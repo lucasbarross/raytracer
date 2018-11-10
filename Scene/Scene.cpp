@@ -2,7 +2,7 @@ void Scene::add(Object* object){
     this->objects.push_back(object);
 }
 
-bool Scene::intersect(const Ray& r, ObjectIntersection* info) {
+bool Scene::intersect(Ray& r, ObjectIntersection* info) {
     vector<ObjectIntersection*> auxInfo;
     
     bool intersected = false;

@@ -8,4 +8,4 @@ struct Material {
     double ks;
     double alpha;
     Vec3 color;
-}
+};

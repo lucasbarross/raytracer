@@ -13,6 +13,8 @@ class Ray {
 		Vec3 getOrigin();
 
 		Vec3 getDirection();
+
+		void print();
 };
 
 #include "Ray.cpp"

@@ -19,10 +19,10 @@ class Vec3{
 		double getZ();
 		void print();
 
-		Vec3 operator+(Vec3& b);
-		Vec3 operator-(Vec3& b);
-		double dotProd(Vec3& b);
-		Vec3 crossProd(Vec3& b);
+		Vec3 operator+(Vec3 b);
+		Vec3 operator-(Vec3 b);
+		double dotProd(Vec3 b);
+		Vec3 crossProd(Vec3 b);
 
 		double magnitude();
 		Vec3 scale(double k);

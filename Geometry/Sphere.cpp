@@ -21,3 +21,7 @@ bool Sphere::intersect(Ray& r, ObjectIntersection* info){
     
     return true;
 };
+
+Vec3 Sphere::getPoint() {
+    return this->center;
+}

@@ -14,7 +14,7 @@ class Object {
     public:
         Object(Geometry* geometry, Material* material);
 
-        bool intersect (const Ray& r, ObjectIntersection* info);
+        bool intersect (Ray& r, ObjectIntersection* info);
 };
 
 #include "Object.cpp"
