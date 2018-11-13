@@ -17,7 +17,7 @@ bool Sphere::intersect(Ray& r, ObjectIntersection* info){
 
     cout << tca - thc << endl; 
     info->t = tca - thc;
-    info->p = r.sample(tca - thc);
+    info->p = r.sample(info->t);
     info->n = info->p - this->center; 
     
     return true;

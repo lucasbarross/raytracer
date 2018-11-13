@@ -23,7 +23,8 @@ Ray Camera::getRay(double x, double y, int width, int height) {
 	Vec3 yIncVect = this->axisY.scale(2* viewPlaneHalfHeight/height);
 
 	Vec3 pixelPosition = viewPlaneBottomLeftPoint + (xIncVect.scale(x)) + (yIncVect.scale(y));
+	Vec3 rayDirection = pixelPosition - this->position;
 	
-	Ray r(this->position, pixelPosition - this->position);
+	Ray r(this->position, rayDirection.normalize());
 	return r;
 }
