@@ -54,7 +54,6 @@ double Vec3::magnitude() {
 
 Vec3 Vec3::normalize() {
     double magnitude = this->magnitude();
-    cout << magnitude << endl;
     return Vec3(this->x/magnitude, this->y/magnitude, this->z/magnitude);
 }
 

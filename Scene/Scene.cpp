@@ -12,6 +12,8 @@ bool Scene::intersect(Ray& r, ObjectIntersection* info) {
         
         if (this->objects[i]->intersect(r, actualObjIntersection)) {
             auxInfo.push_back(actualObjIntersection);
+            cout << "P=";
+            actualObjIntersection->p.print();
             intersected = true;
         }
     }

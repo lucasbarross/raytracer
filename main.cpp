@@ -22,13 +22,12 @@ using namespace std;
 int main() {
     int width = 800, height = 600;
     Scene scene;
-    Camera camera(Vec3(0,0,500), Vec3(0,0,0), Vec3(0,1,0), 70, 10);
+    Camera camera(Vec3(0,0,100), Vec3(0,0,0), Vec3(0,1,0), 90, 10);
     Image image(width, height);
-    Geometry* sphere = new Sphere(Vec3(0,0,0), 20);
+    Geometry* sphere = new Sphere(Vec3(0,0,0), 10);
     Material* material = new Material();
     Object* sphereObject = new Object(sphere, material);
     scene.add(sphereObject);
-    
     ObjectIntersection* objectIntersect = new ObjectIntersection();
     
     for(int i = 0; i < height; i++){
@@ -36,6 +35,9 @@ int main() {
             Ray r = camera.getRay(i, j, width, height);
             bool test = scene.intersect(r, objectIntersect);
             cout << test << " ";
+            cout << "O=";
+            r.getOrigin().print();
+            cout << "D=";
             r.getDirection().print();
             if(test) {
                 image.setPixel(i, j, Vec3(255,255,255));

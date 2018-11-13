@@ -14,9 +14,10 @@ bool Sphere::intersect(Ray& r, ObjectIntersection* info){
     if(d > this->radius * this->radius) return false;
     
     double thc = sqrt(this->radius*this->radius - d);
-    
+
+    cout << tca - thc << endl; 
     info->t = tca - thc;
-    info->p = r.sample(info->t);
+    info->p = r.sample(tca - thc);
     info->n = info->p - this->center; 
     
     return true;

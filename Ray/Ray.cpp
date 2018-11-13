@@ -4,7 +4,7 @@ Ray::Ray(Vec3 origin, Vec3 direction) {
 }
 
 Vec3 Ray::sample(double t) {
-	return (this->origin + this->direction).scale(t);
+	return this->origin + (this->direction).scale(t);
 }
 
 Vec3 Ray::getOrigin() {
