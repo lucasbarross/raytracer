@@ -15,6 +15,8 @@ class Object {
         Object(Geometry* geometry, Material* material);
 
         bool intersect (Ray& r, ObjectIntersection* info);
+
+        Material* getMaterial();
 };
 
 #include "Object.cpp"

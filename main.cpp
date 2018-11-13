@@ -9,6 +9,7 @@
 #include "Vec3/Vec3.h"
 #include "Image/Image.h"
 #include "Ray/Ray.h"
+#include "Light/Light.h"
 #include "Camera/Camera.h"
 #include "Object/ObjectIntersection.h"
 #include "Material/Material.h"
@@ -21,32 +22,28 @@ using namespace std;
 
 int main() {
     int width = 800, height = 600;
-    Scene scene;
     Camera camera(Vec3(0,0,100), Vec3(0,0,0), Vec3(0,1,0), 90, 10);
+    
+    Light* light = new Light(Vec3(10, 10, 10), Vec3(255,255,255), Vec3(0,0,0));
+    Vec3 background = Vec3(0,0,0);
+    
+    Scene scene(light, background);
     Image image(width, height);
+    
     Geometry* sphere = new Sphere(Vec3(0,0,0), 10);
-    Material* material = new Material();
+    Material* material = new Material(0.52, 0, 0.82, 0.1, Vec3(244, 158, 66));
     Object* sphereObject = new Object(sphere, material);
+
     scene.add(sphereObject);
-    ObjectIntersection* objectIntersect = new ObjectIntersection();
     
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             Ray r = camera.getRay(i, j, width, height);
-            bool test = scene.intersect(r, objectIntersect);
-            cout << test << " ";
-            cout << "O=";
-            r.getOrigin().print();
-            cout << "D=";
-            r.getDirection().print();
-            if(test) {
-                image.setPixel(i, j, Vec3(255,255,255));
-            } else {
-                image.setPixel(i, j, Vec3(0,0,0));
-            };
+            Vec3 color = scene.trace(r, 0);
+            image.setPixel(i, j, color);
         }
     }
-
+    
     image.saveAsPBM();
     cout << "MEU DEUS FOI";
     return 0;
