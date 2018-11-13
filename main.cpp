@@ -23,15 +23,15 @@ using namespace std;
 int main() {
     int width = 800, height = 600;
     Camera camera(Vec3(0,0,100), Vec3(0,0,0), Vec3(0,1,0), 90, 10);
-    
-    Light* light = new Light(Vec3(10, 10, 10), Vec3(255,255,255), Vec3(0,0,0));
-    Vec3 background = Vec3(0,0,0);
+
+    Light* light = new Light(Vec3(10, 10, 10), Vec3(255,0,0), Vec3(0,0,255));
+    Vec3 background = Vec3(255,0,255);
     
     Scene scene(light, background);
     Image image(width, height);
     
     Geometry* sphere = new Sphere(Vec3(0,0,0), 10);
-    Material* material = new Material(0.52, 0, 0.82, 0.1, Vec3(244, 158, 66));
+    Material* material = new Material(0.52, 0, 0.82, 0.1, Vec3(0, 255, 0));
     Object* sphereObject = new Object(sphere, material);
 
     scene.add(sphereObject);
