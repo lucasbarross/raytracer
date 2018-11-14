@@ -49,10 +49,10 @@ Vec3 Scene::trace(Ray& r, int recursionLevel){
     if(this->intersect(r, objIntersection)){
         Material* material = objIntersection->o->getMaterial();
         Vec3 normal = objIntersection->n;
-        Vec3 direction = r.getDirection();
+        Vec3 direction = r.getDirection().invert();
         Vec3 lightRay = (objIntersection->p - this->light->position).normalize();
-        Vec3 reflection = lightRay - normal.scale((lightRay.dotProd(normal) * 2));
-        this->phong(material, direction, lightRay, normal, reflection).print();
+        Vec3 reflection = lightRay - normal.scale((lightRay.dotProd(normal) * 2)).invert();
+        // this->phong(material, direction, lightRay, normal, reflection).print();
         return this->phong(material, direction, lightRay, normal, reflection); 
 
     } else {
@@ -65,19 +65,14 @@ Vec3 Scene::phong(Material* material, Vec3 direction, Vec3 lightRay, Vec3 normal
     double a = lightRay.dotProd(normal);
     double b = reflection.dotProd(direction);
     Vec3 diffuse, specular;
+    
+    diffuse = material->color.scale(material->kd * a);
 
-    if (a < 0) {
-        diffuse = Vec3(0,0 ,0);
-    } else {
-        diffuse = this->light->id.scale(material->kd * a);
-    }
-
-    if (b < 0) {
+    if(b <= 0) {
         specular = Vec3(0, 0, 0);
     } else {
-        specular = this->light->is.scale(material->ks * pow(b, material->alpha));
-
+        specular = material->color.scale(material->ks * pow(b, material->alpha));
     }
-    
-    return material->color.scale(material->ke) + diffuse + specular; 
+
+    return  diffuse + specular; 
 }
