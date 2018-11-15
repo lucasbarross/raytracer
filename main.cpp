@@ -31,7 +31,7 @@ int main() {
     Image image(width, height);
     
     Geometry* sphere = new Sphere(Vec3(0,0,0), 20);
-    Material* material = new Material(0.52, 0.45, 0.1, 200, Vec3(10, 255, 10));
+    Material* material = new Material(0.1, 0.45, 0.1, 200, Vec3(10, 255, 10));
     Object* sphereObject = new Object(sphere, material);
 
     scene.add(sphereObject);

@@ -72,5 +72,5 @@ Vec3 Scene::phong(Material* material, Vec3 direction, Vec3 lightRay, Vec3 normal
     if (specular < 0) {
         specular = 0;
     }
-    return material->color.scale(this->ka + diffuse + specular); 
+    return material->color.scale(this->ka + diffuse + specular + material->ke); 
 }
