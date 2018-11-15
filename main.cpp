@@ -22,16 +22,16 @@ using namespace std;
 
 int main() {
     int width = 800, height = 600;
-    Camera camera(Vec3(0,0,0), Vec3(10,10,10), Vec3(0,1,0), 90, 10);
+    Camera camera(Vec3(0,0,100), Vec3(0,0,0), Vec3(0,1,0), 90, 10);
 
-    Light* light = new Light(Vec3(500, 500, 0), Vec3(255,255,255), Vec3(255,255,255));
-    Vec3 background = Vec3(112, 112, 112);
+    Light* light = new Light(Vec3(500, 500, 500), Vec3(255,255,255), Vec3(255,255,255));
+    Vec3 background = Vec3(50, 50, 50);
     
-    Scene scene(light, background);
+    Scene scene(light, background, 0.1);
     Image image(width, height);
     
-    Geometry* sphere = new Sphere(Vec3(100,100,100), 50);
-    Material* material = new Material(0.52, 0.05, 0.1, 0.3, Vec3(0, 255, 0));
+    Geometry* sphere = new Sphere(Vec3(0,0,0), 20);
+    Material* material = new Material(0.52, 0.45, 0.1, 200, Vec3(10, 255, 10));
     Object* sphereObject = new Object(sphere, material);
 
     scene.add(sphereObject);

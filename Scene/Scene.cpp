@@ -1,6 +1,7 @@
-Scene::Scene(Light* light, Vec3 background){
+Scene::Scene(Light* light, Vec3 background, double ka){
     this->light = light;
     this->background = background;
+    this->ka = ka;
 }
 
 
@@ -48,10 +49,10 @@ Vec3 Scene::trace(Ray& r, int recursionLevel){
     ObjectIntersection* objIntersection = new ObjectIntersection();
     if(this->intersect(r, objIntersection)){
         Material* material = objIntersection->o->getMaterial();
-        Vec3 normal = objIntersection->n;
-        Vec3 direction = r.getDirection().invert();
-        Vec3 lightRay = (objIntersection->p - this->light->position).normalize();
-        Vec3 reflection = lightRay - normal.scale((lightRay.dotProd(normal) * 2)).invert();
+        Vec3 normal = objIntersection->n.normalize();
+        Vec3 direction = r.getDirection();
+        Vec3 lightRay = (this->light->position - objIntersection->p).normalize();
+        Vec3 reflection = (lightRay - normal.scale((lightRay.dotProd(normal) * 2)));
         // this->phong(material, direction, lightRay, normal, reflection).print();
         return this->phong(material, direction, lightRay, normal, reflection); 
 
@@ -62,17 +63,14 @@ Vec3 Scene::trace(Ray& r, int recursionLevel){
 }
 
 Vec3 Scene::phong(Material* material, Vec3 direction, Vec3 lightRay, Vec3 normal, Vec3 reflection){
-    double a = lightRay.dotProd(normal);
-    double b = reflection.dotProd(direction);
-    Vec3 diffuse, specular;
-    
-    diffuse = material->color.scale(material->kd * a);
-
-    if(b <= 0) {
-        specular = Vec3(0, 0, 0);
-    } else {
-        specular = material->color.scale(material->ks * pow(b, material->alpha));
+    double diffuse, specular;
+    diffuse = lightRay.dotProd(normal) * material->kd;
+    specular = (material->ks * pow(reflection.dotProd(direction), material->alpha));
+    if (diffuse < 0) {
+        diffuse = 0;
     }
-
-    return  diffuse + specular; 
+    if (specular < 0) {
+        specular = 0;
+    }
+    return material->color.scale(this->ka + diffuse + specular); 
 }

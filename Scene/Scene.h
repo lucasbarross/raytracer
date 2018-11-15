@@ -11,10 +11,11 @@ class Scene {
         vector<Object*> objects;
         Vec3 background;
         Light *light;
+        double ka;
         Vec3 phong(Material* material, Vec3 direction, Vec3 lightRay, Vec3 normal, Vec3 reflection);
         
     public:
-        Scene(Light* light, Vec3 background);
+        Scene(Light* light, Vec3 background, double ka);
         //Retorna true se r intersecta a cena e falso caso contrário.
         //Guarda possíveis informacoes sobre a intersection em info, caso seja provido
         bool intersect(Ray& r, ObjectIntersection* info);
