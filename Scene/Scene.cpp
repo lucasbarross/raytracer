@@ -1,9 +1,7 @@
 Scene::Scene(Light* light, Vec3 background, double ka){
     this->light = light;
     this->background = background;
-    this->ka = ka;
 }
-
 
 void Scene::add(Object* object){
     this->objects.push_back(object);
@@ -66,11 +64,15 @@ Vec3 Scene::phong(Material* material, Vec3 direction, Vec3 lightRay, Vec3 normal
     double diffuse, specular;
     diffuse = lightRay.dotProd(normal) * material->kd;
     specular = (material->ks * pow(reflection.dotProd(direction), material->alpha));
+    
     if (diffuse < 0) {
         diffuse = 0;
     }
     if (specular < 0) {
         specular = 0;
     }
-    return material->color.scale(this->ka + diffuse + specular + material->ke); 
+    
+    Vec3 resultColor = this->light->color * material->color;
+
+    return resultColor.scale(material->ke + specular + diffuse); 
 }

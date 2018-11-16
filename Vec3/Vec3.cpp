@@ -23,6 +23,12 @@ Vec3 Vec3::operator-(Vec3 b){
     Vec3 v(a[0] - bc[0], a[1] - bc[1], a[2] - bc[2]);
     return v;
 }
+Vec3 Vec3::operator*(Vec3 b){
+    vector<double> a = this->getCoords();
+    vector<double> bc = b.getCoords();
+    Vec3 v(a[0] * bc[0], a[1] * bc[1], a[2] * bc[2]);
+    return v;
+}
 
 Vec3 Vec3::scale(double k){
     vector<double> a = this->getCoords();

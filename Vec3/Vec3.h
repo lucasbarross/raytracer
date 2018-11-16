@@ -21,6 +21,7 @@ class Vec3{
 
 		Vec3 operator+(Vec3 b);
 		Vec3 operator-(Vec3 b);
+		Vec3 operator*(Vec3 b);
 		double dotProd(Vec3 b);
 		Vec3 crossProd(Vec3 b);
 

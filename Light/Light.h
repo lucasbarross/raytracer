@@ -2,12 +2,10 @@
 
 struct Light {
     Vec3 position;
-    Vec3 is; //specular - color
-    Vec3 id; //diffuse - point of reflection color
+    Vec3 color; //specular - color
 
-    Light(Vec3 position, Vec3 is, Vec3 id){
+    Light(Vec3 position, Vec3 color){
         this->position = position;
-        this->is = is;
-        this->id = id;
+        this->color = color;
     }
 };
