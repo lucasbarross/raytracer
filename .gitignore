@@ -4,6 +4,8 @@
 # Unignore all with extensions
 !*.cpp
 !*.h
+!config.txt
+!image.ppm
 
 # Unignore all dirs
 !*/

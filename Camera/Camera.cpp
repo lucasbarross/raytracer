@@ -1,5 +1,5 @@
 Camera::Camera(Vec3 position, Vec3 target, Vec3 up, double fov, double near){
-	this->fov = M_PI * fov /180;
+	this->fov = 3.14 * fov /180;
 	this->near = near;
 	this->position = position;
 

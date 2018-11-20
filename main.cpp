@@ -1,9 +1,10 @@
 #pragma once
 
+#include <utility>
 #include <vector>
-#include <bits/stdc++.h>
 #include <math.h>
 #include <float.h>
+#include <iostream>
 
 #include "util.cpp"
 #include "Vec3/Vec3.h"
@@ -16,12 +17,19 @@
 #include "Geometry/Geometry.h"
 #include "Object/Object.h"
 #include "Scene/Scene.h"
+#include "Parser/Parser.h"
 
 using namespace std;
 
 
 int main() {
+    Parser parser("config.txt");
+    
+    // map<string, int> cameraOptions = parser.searchKey("#camera")[0];
+    // para acessar: cameraOptions["positionX"], cameraOptions["positionY"] e assim por diante, como definido no config.txt
+
     int width = 800, height = 600;
+    
     Camera camera(Vec3(0,0,100), Vec3(0,0,0), Vec3(0,1,0), 90, 10);
 
     Light* light = new Light(Vec3(500, 500, 500), Vec3(255,100,255));
