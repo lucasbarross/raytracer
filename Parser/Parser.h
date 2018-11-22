@@ -13,7 +13,7 @@ class Parser {
     public:
         Parser(string file);
         map<string, int> getCameraParams();
-        vector<map<string, int> > searchKey(string key);    
+        vector<map<string, double> > searchKey(string key);    
 };
 
 #include "Parser.cpp"

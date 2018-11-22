@@ -21,38 +21,66 @@
 
 using namespace std;
 
+Material* findMaterial(vector<Material*> materials, int id){
+    for(int i = 0; i < materials.size(); i++){
+        if(materials[i]->id == id){
+            return materials[i];
+        } 
+    }
+
+    return new Material(0, 0, 0,0, 100, Vec3(0.1,1,0.1));
+}
 
 int main() {
     Parser parser("config.txt");
-    
-    // map<string, int> cameraOptions = parser.searchKey("#camera")[0];
+    map<string, double> camOpt = parser.searchKey("camera")[0];
+    map<string, double> imgOpt = parser.searchKey("image")[0];
+    map<string, double> sceneOpt = parser.searchKey("scene")[0];
+    map<string, double> lightOpt = parser.searchKey("light")[0];
+    vector<map<string, double> > materials = parser.searchKey("materials");
+    vector<map<string, double> > objects = parser.searchKey("objects");
     // para acessar: cameraOptions["positionX"], cameraOptions["positionY"] e assim por diante, como definido no config.txt
 
-    int width = 800, height = 600;
+    int width = imgOpt["width"], height = imgOpt["height"];
     
-    Camera camera(Vec3(0,0,100), Vec3(0,0,0), Vec3(0,1,0), 50, 10);
+    Camera camera(Vec3(camOpt["positionX"],camOpt["positionY"],camOpt["positionZ"]), 
+                  Vec3(camOpt["targetX"],camOpt["targetY"],camOpt["targetZ"]), 
+                  Vec3(camOpt["upX"],camOpt["upY"], camOpt["upZ"]), 
+                  camOpt["fov"], camOpt["near"]);
 
-    Light* light = new Light(Vec3(100, 100, 0), Vec3(255,255,255));
-    Vec3 background = Vec3(50, 50, 50);
+    Light* light = new Light(Vec3(lightOpt["positionX"], lightOpt["positionY"], lightOpt["positionZ"]), 
+                             Vec3(lightOpt["colorR"],lightOpt["colorG"], lightOpt["colorB"]));
     
-    Scene scene(light, background, 0.1);
+    Vec3 background = Vec3(imgOpt["bgR"], imgOpt["bgG"], imgOpt["bgB"]);
+    
+    Scene scene(light, background, sceneOpt["ka"]);
     Image image(width, height);
+    
+    vector<Material*> materialsObjects;
+    vector<Object*> objectsToRender;
 
-    // Ta distocendo quanto mais longe do centro
+    for(int i = 0; i < materials.size(); i++) {
+        map<string,double> materialOpt = materials[i];
+        materialsObjects.push_back(new Material(materialOpt["id"], materialOpt["ke"], materialOpt["kd"], materialOpt["ks"], 
+                                   materialOpt["alpha"], Vec3(materialOpt["colorR"], materialOpt["colorG"], materialOpt["colorB"])));
+    }
 
-   
-    Geometry* sphere = new Sphere(Vec3(0,0,0), 10);
-    Material* material = new Material(0.1, 0.45, 0.1, 200, Vec3(0.1, 1, 0.1));
-    Object* sphereObject = new Object(sphere, material);
+    for(int i = 0; i < objects.size(); i++){
+        map<string,double> objectsOpt = objects[i];
+        
+        Geometry* geometry;
+        Material* material = findMaterial(materialsObjects, objectsOpt["materialId"]);
+        if(objectsOpt["type"] == 1){
+            geometry = new Plane(Vec3(objectsOpt["centerX"], objectsOpt["centerY"], objectsOpt["centerZ"]), 
+                                 Vec3(objectsOpt["vec1X"],objectsOpt["vec1Y"], objectsOpt["vec1Z"]),
+                                 Vec3(objectsOpt["vec2X"], objectsOpt["vec2Y"], objectsOpt["vec2Z"]));
+        } else{
+            geometry = new Sphere(Vec3(objectsOpt["centerX"], objectsOpt["centerY"], objectsOpt["centerZ"]), objectsOpt["radius"]);
+        }
 
-    scene.add(sphereObject);
-
-    Geometry* spherea = new Plane(Vec3(0,0,0), Vec3(50,30, 2), Vec3(22,32,44));
-    Material* materiala = new Material(0.5, 0.45, 0.1, 200, Vec3(1, 0, 0));
-    Object* sphereObjecta = new Object(spherea, materiala);
-
-    scene.add(sphereObjecta);
-
+        scene.add(new Object(geometry, material));
+    }
+    
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             Ray r = camera.getRay(i, j, width, height);
