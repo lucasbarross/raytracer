@@ -17,14 +17,14 @@ targetZ=0
 upX=0
 upY=1
 upZ=0
-fov=90
+fov=50
 near=10
 
 #light
 
-positionX=500
-positionY=500
-positionZ=500
+positionX=100
+positionY=100
+positionZ=0
 colorR=255
 colorG=255
 colorB=255
