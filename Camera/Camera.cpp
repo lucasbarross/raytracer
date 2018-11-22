@@ -2,7 +2,7 @@ Camera::Camera(Vec3 position, Vec3 target, Vec3 up, double fov, double near){
 	this->fov = 3.14 * fov /180;
 	this->near = near;
 	this->position = position;
-
+		
 	Vec3 diference = target - position; // Inverti aqui
 	this->axisZ = diference.normalize();
 	this->axisX = this->axisZ.crossProd(up).invert().normalize();

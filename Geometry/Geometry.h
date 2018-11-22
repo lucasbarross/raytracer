@@ -25,4 +25,20 @@ class Sphere : public Geometry {
         Vec3 getPoint() override;
 };
 
+class Plane : public Geometry {
+    private: 
+        Vec3 p1;
+        Vec3 p2;
+        Vec3 p3;
+        Vec3 normal;
+        double b, h;
+    public:
+        Plane(Vec3 p1, Vec3 p2, Vec3 p3);
+        bool intersectPlane(Ray& r, ObjectIntersection* info);
+        bool intersect(Ray& r, ObjectIntersection* info);
+        Vec3 getPoint() override;
+        Vec3 getNormal();
+};
+
 #include "Sphere.cpp"
+#include "Plane.cpp"

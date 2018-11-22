@@ -30,20 +30,34 @@ int main() {
 
     int width = 800, height = 600;
     
-    Camera camera(Vec3(0,0,100), Vec3(0,0,0), Vec3(0,1,0), 90, 10);
+    Camera camera(Vec3(0,0,100), Vec3(0,0,0), Vec3(0,1,0), 50, 10);
 
-    Light* light = new Light(Vec3(500, 500, 500), Vec3(255,100,255));
+    Light* light = new Light(Vec3(100, 100, 0), Vec3(255,255,255));
     Vec3 background = Vec3(50, 50, 50);
     
     Scene scene(light, background, 0.1);
     Image image(width, height);
-    
-    Geometry* sphere = new Sphere(Vec3(0,0,0), 20);
+
+    // Ta distocendo quanto mais longe do centro
+
+    Geometry* sphereb = new Sphere(Vec3(0,0, 0), 10);
+    Material* materialb = new Material(0.1, 0.45, 0.1, 200, Vec3(0.1, 1, 0.1));
+    Object* sphereObjectb = new Object(sphereb, materialb);
+
+    scene.add(sphereObjectb);
+   
+    Geometry* sphere = new Sphere(Vec3(5,0,5), 10);
     Material* material = new Material(0.1, 0.45, 0.1, 200, Vec3(0.1, 1, 0.1));
     Object* sphereObject = new Object(sphere, material);
 
     scene.add(sphereObject);
-    
+
+    Geometry* spherea = new Plane(Vec3(0,0,-100), Vec3(1, 0, 0), Vec3(0,0,1));
+    Material* materiala = new Material(0.1, 0.45, 0.1, 200, Vec3(1, 0, 0));
+    Object* sphereObjecta = new Object(spherea, materiala);
+
+    scene.add(sphereObjecta);
+
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             Ray r = camera.getRay(i, j, width, height);
