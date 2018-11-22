@@ -40,20 +40,15 @@ int main() {
 
     // Ta distocendo quanto mais longe do centro
 
-    Geometry* sphereb = new Sphere(Vec3(0,0, 0), 10);
-    Material* materialb = new Material(0.1, 0.45, 0.1, 200, Vec3(0.1, 1, 0.1));
-    Object* sphereObjectb = new Object(sphereb, materialb);
-
-    scene.add(sphereObjectb);
    
-    Geometry* sphere = new Sphere(Vec3(5,0,5), 10);
+    Geometry* sphere = new Sphere(Vec3(0,0,0), 10);
     Material* material = new Material(0.1, 0.45, 0.1, 200, Vec3(0.1, 1, 0.1));
     Object* sphereObject = new Object(sphere, material);
 
     scene.add(sphereObject);
 
-    Geometry* spherea = new Plane(Vec3(0,0,-100), Vec3(1, 0, 0), Vec3(0,0,1));
-    Material* materiala = new Material(0.1, 0.45, 0.1, 200, Vec3(1, 0, 0));
+    Geometry* spherea = new Plane(Vec3(0,0,0), Vec3(50,30, 2), Vec3(22,32,44));
+    Material* materiala = new Material(0.5, 0.45, 0.1, 200, Vec3(1, 0, 0));
     Object* sphereObjecta = new Object(spherea, materiala);
 
     scene.add(sphereObjecta);
