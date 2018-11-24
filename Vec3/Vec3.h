@@ -30,6 +30,7 @@ class Vec3{
 		Vec3 normalize();
 		Vec3 invert();
 		Vec3 transformVec(vector<vector<double>> a);
+		bool equals(Vec3 b);
 };
 
 #include "Vec3.cpp"

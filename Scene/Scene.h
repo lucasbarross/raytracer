@@ -11,7 +11,7 @@ class Scene {
         vector<Object*> objects;
         Vec3 background;
         Light *light;
-        Vec3 phong(Material* material, Vec3 direction, Vec3 normal, Vec3 position, Light* light);
+        Vec3 phong(Material* material, Vec3 direction, Vec3 normal, Vec3 lightRay);
         
     public:
         Scene(Light* light, Vec3 background, double ka);

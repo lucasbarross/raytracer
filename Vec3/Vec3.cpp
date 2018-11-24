@@ -81,6 +81,10 @@ Vec3 Vec3::transformVec(vector<vector<double>> a) {
     return Vec3(coords[0], coords[1], coords[2]);
 }
 
+bool Vec3::equals(Vec3 b) {
+    return this->x == b.getX() && this->y == b.getY() && this->z == b.getZ();
+}
+
 double Vec3::getX() {
     return this->x;
 }

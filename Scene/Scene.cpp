@@ -35,7 +35,7 @@ bool Scene::intersect(Ray& r, ObjectIntersection* info) {
         }
     }   
 
-    info->t = min->t;
+    info->t = min->t - 0.0001;
     info->n = min->n;
     info->p = min->p;
     info->o = min->o;
@@ -49,18 +49,30 @@ Vec3 Scene::trace(Ray& r, int recursionLevel){
         Material* material = objIntersection->o->getMaterial();
         Vec3 normal = objIntersection->n;
         Vec3 direction = r.getDirection();
-        return this->phong(material, direction, normal, objIntersection->p, this->light); 
-        // return Vec3(255,255,255);
+        
+        Vec3 lightRayDirection = (light->position - objIntersection->p ).normalize();
+        Ray lightRay ( objIntersection->p, lightRayDirection);
+
+        Vec3 color = (Vec3(255, 255, 255) * material->color).scale(material->ke);
+
+        ObjectIntersection* info = new ObjectIntersection();
+        if (this->intersect(lightRay, info)) {
+            //TODO: Testar se objeto não está depois da Luz
+            if (info->t > 0) { // Testa se objeto está atrás da luz 
+                return color;
+            }
+        }
+
+        return color + this->phong(material, direction, normal,lightRayDirection); 
     } else {
         return this->background;
     };
     delete objIntersection;
 }
 
-Vec3 Scene::phong(Material* material, Vec3 direction, Vec3 normal, Vec3 position, Light* light){
+Vec3 Scene::phong(Material* material, Vec3 direction, Vec3 normal, Vec3 lightRay){
     // TODO: direction.dotProd(normal) < 0 => normal.invert()
 
-    Vec3 lightRay = (light->position - position).normalize();
     Vec3 reflection = (lightRay - normal.scale((lightRay.dotProd(normal) * 2))).normalize();
 
     double diffuse, specular;
@@ -74,5 +86,5 @@ Vec3 Scene::phong(Material* material, Vec3 direction, Vec3 normal, Vec3 position
 
     Vec3 resultColor = this->light->color * material->color;
 
-    return resultColor.scale(material->ke + specular + diffuse); 
+    return resultColor.scale(specular + diffuse); 
 }
