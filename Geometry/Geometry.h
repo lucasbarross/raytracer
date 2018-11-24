@@ -25,7 +25,7 @@ class Sphere : public Geometry {
         Vec3 getPoint() override;
 };
 
-class Plane : public Geometry {
+class InfinitePlane : public Geometry {
     private: 
         Vec3 p1;
         Vec3 p2;
@@ -33,12 +33,27 @@ class Plane : public Geometry {
         Vec3 normal;
         double b, h;
     public:
-        Plane(Vec3 p1, Vec3 p2, Vec3 p3);
-        bool intersectPlane(Ray& r, ObjectIntersection* info);
+        InfinitePlane(Vec3 p1, Vec3 p2, Vec3 p3);
+        bool intersectInfinitePlane(Ray& r, ObjectIntersection* info);
         bool intersect(Ray& r, ObjectIntersection* info);
         Vec3 getPoint() override;
         Vec3 getNormal();
 };
 
+class Triangle : public Geometry {
+    private: 
+        Vec3 a;
+        Vec3 b;
+        Vec3 c;
+        Vec3 normal;
+    public:
+        Triangle(Vec3 a, Vec3 b, Vec3 c);
+        Vec3 getPoint() override;
+        bool intersectPlane(Ray& r);
+        bool intersect(Ray& r, ObjectIntersection* info);
+};
+
+
 #include "Sphere.cpp"
 #include "Plane.cpp"
+#include "Triangle.cpp"

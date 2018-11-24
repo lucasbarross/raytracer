@@ -10,7 +10,7 @@ bgB=50
 
 positionX=0 
 positionY=0 
-positionZ=100
+positionZ=200
 targetX=0
 targetY=0
 targetZ=0
@@ -57,17 +57,17 @@ colorB=0
 
 type=0
 materialId=0
-centerX=0
-centerY=0
-centerZ=0
-radius=10
+centerX=-10
+centerY=10
+centerZ=5
+radius=20
 
 type=0
 materialId=0
-centerX=20
-centerY=20
-centerZ=5
-radius=15
+centerX=10
+centerY=10
+centerZ=10
+radius=20
 
 type=1
 materialId=1
@@ -80,3 +80,15 @@ vec1Z=2
 vec2X=22
 vec2Y=32
 vec2Z=44
+
+type=2
+materialId=1
+aX=0
+aY=-50
+aZ=50
+bX=0
+bY=50
+bZ=50
+cX=50
+cY=0
+cZ=50

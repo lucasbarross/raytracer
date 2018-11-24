@@ -1,4 +1,4 @@
-Plane::Plane(Vec3 p1, Vec3 p2, Vec3 p3) {
+InfinitePlane::InfinitePlane(Vec3 p1, Vec3 p2, Vec3 p3) {
     
     this->p1 = p1;
     this->p2 = p2;
@@ -10,7 +10,7 @@ Plane::Plane(Vec3 p1, Vec3 p2, Vec3 p3) {
     this->normal = (p2 - p1).crossProd(p3 - p1).normalize();
 };
 
-bool Plane::intersectPlane(Ray& r, ObjectIntersection* info){      
+bool InfinitePlane::intersectInfinitePlane(Ray& r, ObjectIntersection* info){      
     float t, denom; 
     // this->normal = this->normal.invert();
     Vec3 normalAux = this->normal;
@@ -35,8 +35,8 @@ bool Plane::intersectPlane(Ray& r, ObjectIntersection* info){
     } 
     return false;
 };
-bool Plane::intersect(Ray& r, ObjectIntersection* info){
-    if (this->intersectPlane(r, info)) {
+bool InfinitePlane::intersect(Ray& r, ObjectIntersection* info){
+    if (this->intersectInfinitePlane(r, info)) {
         // double xDistance =  
         // info->p distancia pro this->p1
         return true;
@@ -44,10 +44,10 @@ bool Plane::intersect(Ray& r, ObjectIntersection* info){
     return false;
 }
 
-Vec3 Plane::getPoint() {
+Vec3 InfinitePlane::getPoint() {
     return this->p1;
 }
 
-Vec3 Plane::getNormal() {
+Vec3 InfinitePlane::getNormal() {
     return this->normal;
 }

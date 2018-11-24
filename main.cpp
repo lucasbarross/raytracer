@@ -71,9 +71,11 @@ int main() {
         Geometry* geometry;
         Material* material = findMaterial(materialsObjects, objectsOpt["materialId"]);
         if(objectsOpt["type"] == 1){
-            geometry = new Plane(Vec3(objectsOpt["centerX"], objectsOpt["centerY"], objectsOpt["centerZ"]), 
+            geometry = new InfinitePlane(Vec3(objectsOpt["centerX"], objectsOpt["centerY"], objectsOpt["centerZ"]), 
                                  Vec3(objectsOpt["vec1X"],objectsOpt["vec1Y"], objectsOpt["vec1Z"]),
                                  Vec3(objectsOpt["vec2X"], objectsOpt["vec2Y"], objectsOpt["vec2Z"]));
+        }else if(objectsOpt["type"]==2){
+            geometry = new Triangle(Vec3(objectsOpt["aX"],objectsOpt["aY"],objectsOpt["aZ"]), Vec3(objectsOpt["bX"],objectsOpt["bY"],objectsOpt["bZ"]), Vec3(objectsOpt["cX"],objectsOpt["cY"],objectsOpt["cZ"]));
         } else{
             geometry = new Sphere(Vec3(objectsOpt["centerX"], objectsOpt["centerY"], objectsOpt["centerZ"]), objectsOpt["radius"]);
         }
