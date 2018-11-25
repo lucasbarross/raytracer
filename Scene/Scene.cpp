@@ -60,15 +60,16 @@ Vec3 Scene::trace(Ray& r, int recursionLevel){
         Vec3 color = (Vec3(255, 255, 255) * material->color).scale(material->ke);
 
         // Calcula o raio de luz incidente no ponto de intersecção            
-        Vec3 lightRayDirection = (light->position - objIntersection->p ).normalize();
-        Ray lightRay (this->light->position, lightRayDirection.invert());
-
+        Vec3 lightRayVector = (light->position - objIntersection->p );
+        Vec3 lightRayDirection = lightRayVector.normalize();
+        Ray lightRay = Ray(objIntersection->p, lightRayDirection);
+        double tLight = lightRayVector.magnitude();
 
         // Testa se raio de luz intersecta objeto antes de chegar na luz     
         ObjectIntersection* info = new ObjectIntersection();
         if (this->intersect(lightRay, info)) {
             // Testa se objeto está antes do ponto (em relação a luz) e na frente da luz 
-            if (info->t > 0 && !info->p.aproximateEquals(objIntersection->p)) { 
+            if (info->t > 0 && info->t <= tLight) { 
                 return color;
             }
         }
