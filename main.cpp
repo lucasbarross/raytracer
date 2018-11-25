@@ -6,6 +6,8 @@
 #include <float.h>
 #include <iostream>
 
+const double EPSILON = 0.001;
+
 #include "util.cpp"
 #include "Vec3/Vec3.h"
 #include "Image/Image.h"
@@ -92,6 +94,5 @@ int main() {
     }
     
     image.saveAsPBM();
-    cout << "MEU DEUS FOI";
     return 0;
 }

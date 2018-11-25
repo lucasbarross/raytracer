@@ -10,23 +10,20 @@ InfinitePlane::InfinitePlane(Vec3 p1, Vec3 p2, Vec3 p3) {
     this->normal = (p2 - p1).crossProd(p3 - p1).normalize();
 };
 
-bool InfinitePlane::intersectInfinitePlane(Ray& r, ObjectIntersection* info){      
+bool InfinitePlane::intersect(Ray& r, ObjectIntersection* info){      
     float t, denom; 
-    // this->normal = this->normal.invert();
     Vec3 normalAux = this->normal;
     denom = normalAux.dotProd(r.getDirection());
     
     if(denom < 0){
         normalAux = normalAux.invert();
-        // denom = normalAux.dotProd(r.getDirection());  
     } 
 
-    if ( -denom > 0.0001) { 
+    if ( -denom > EPSILON) { 
         Vec3 point = (this->p1 - r.getOrigin()); 
 
         t = ((point.dotProd(normalAux) + normalAux.dotProd(this->p1)) / -denom);
-        // float t = - (dot(N, orig) + D) / dot(N, dir);
-        if(t < 0.00001) return false;
+        if(t < EPSILON) return false;
         
         info->t = t;
         info->p = r.sample(info->t);
@@ -35,14 +32,6 @@ bool InfinitePlane::intersectInfinitePlane(Ray& r, ObjectIntersection* info){
     } 
     return false;
 };
-bool InfinitePlane::intersect(Ray& r, ObjectIntersection* info){
-    if (this->intersectInfinitePlane(r, info)) {
-        // double xDistance =  
-        // info->p distancia pro this->p1
-        return true;
-    }
-    return false;
-}
 
 Vec3 InfinitePlane::getPoint() {
     return this->p1;

@@ -24,7 +24,7 @@ near=10
 
 positionX=100
 positionY=100
-positionZ=0
+positionZ=100
 colorR=255
 colorG=255
 colorB=255
@@ -62,15 +62,9 @@ centerY=0
 centerZ=0
 radius=20
 
-
-type=2
-materialId=1
-aX=30
-aY=-33
-aZ=-20
-bX=10
-bY=35
-bZ=10
-cX=10
-cY=30
-cZ=40
+type=0
+materialId=0
+centerX=30
+centerY=30
+centerZ=30
+radius=5

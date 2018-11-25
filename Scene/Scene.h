@@ -1,7 +1,5 @@
 #pragma once
 
-// #include "Object.h"
-// #include "ObjectIntersection.h"
 #include <vector>
 
 using namespace std;

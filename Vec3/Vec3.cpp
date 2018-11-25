@@ -85,6 +85,13 @@ bool Vec3::equals(Vec3 b) {
     return this->x == b.getX() && this->y == b.getY() && this->z == b.getZ();
 }
 
+bool Vec3::aproximateEquals(Vec3 b) {
+    double xDifference = this->x - b.getX();
+    double yDifference = this->y - b.getY();
+    double zDifference = this->z - b.getZ();
+    return (xDifference < EPSILON) && (yDifference < EPSILON) && (zDifference < EPSILON);
+}
+
 double Vec3::getX() {
     return this->x;
 }

@@ -2,7 +2,7 @@
 
 struct Light {
     Vec3 position;
-    Vec3 color; //specular - color
+    Vec3 color;
 
     Light(Vec3 position, Vec3 color){
         this->position = position;

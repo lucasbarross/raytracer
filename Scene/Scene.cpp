@@ -12,7 +12,8 @@ bool Scene::intersect(Ray& r, ObjectIntersection* info) {
     
     bool intersected = false;
 
-    for(int i = 0; i < this->objects.size(); i++){
+    for(int i = 0; i < this->objects.size(); i++){ 
+        // Itera pela lista de objetos adicionando os intersectados a lista
         ObjectIntersection* actualObjIntersection = new ObjectIntersection();
         
         if (this->objects[i]->intersect(r, actualObjIntersection)) {
@@ -25,7 +26,7 @@ bool Scene::intersect(Ray& r, ObjectIntersection* info) {
     if(!intersected) return false;
 
     ObjectIntersection* min = auxInfo[0];
-
+    // Procura objeto com o menor T
     for(int i = 1; i < auxInfo.size(); i++){
         if(auxInfo[i]->t < min->t){
             delete min;
@@ -35,7 +36,10 @@ bool Scene::intersect(Ray& r, ObjectIntersection* info) {
         }
     }   
 
-    info->t = min->t - 0.0001;
+    // Salva as informações do Objeto
+    info->t = min->t - EPSILON; 
+    // A substração do EPISILON para corrigir o caso em que a propria superficie se bloqueia
+    // causando um glitch na iluminação da superificie toda
     info->n = min->n;
     info->p = min->p;
     info->o = min->o;
@@ -45,23 +49,30 @@ bool Scene::intersect(Ray& r, ObjectIntersection* info) {
 
 Vec3 Scene::trace(Ray& r, int recursionLevel){
     ObjectIntersection* objIntersection = new ObjectIntersection();
-    if(this->intersect(r, objIntersection)){
+    
+    // Testa se o objeto foi intersectado
+    if (this->intersect(r, objIntersection)){
         Material* material = objIntersection->o->getMaterial();
         Vec3 normal = objIntersection->n;
         Vec3 direction = r.getDirection();
-        
-        Vec3 lightRayDirection = (light->position - objIntersection->p ).normalize();
-        Ray lightRay ( objIntersection->p, lightRayDirection);
 
+        // Calcula componente emissiva (que independe da fonte de luz)
         Vec3 color = (Vec3(255, 255, 255) * material->color).scale(material->ke);
 
+        // Calcula o raio de luz incidente no ponto de intersecção            
+        Vec3 lightRayDirection = (light->position - objIntersection->p ).normalize();
+        Ray lightRay (this->light->position, lightRayDirection.invert());
+
+
+        // Testa se raio de luz intersecta objeto antes de chegar na luz     
         ObjectIntersection* info = new ObjectIntersection();
         if (this->intersect(lightRay, info)) {
-            //TODO: Testar se objeto não está depois da Luz
-            if (info->t > 0) { // Testa se objeto está atrás da luz 
+            // Testa se objeto está antes do ponto (em relação a luz) e na frente da luz 
+            if (info->t > 0 && !info->p.aproximateEquals(objIntersection->p)) { 
                 return color;
             }
         }
+        delete info;
 
         return color + this->phong(material, direction, normal,lightRayDirection); 
     } else {
@@ -70,15 +81,13 @@ Vec3 Scene::trace(Ray& r, int recursionLevel){
     delete objIntersection;
 }
 
-Vec3 Scene::phong(Material* material, Vec3 direction, Vec3 normal, Vec3 lightRay){
-    // TODO: direction.dotProd(normal) < 0 => normal.invert()
-
+Vec3 Scene::phong(Material* material, Vec3 direction, Vec3 normal, Vec3 lightRay){ // Calcula modelo de iluminação local de phong
     Vec3 reflection = (lightRay - normal.scale((lightRay.dotProd(normal) * 2))).normalize();
 
     double diffuse, specular;
-    
-    specular = (material->ks * pow(reflection.dotProd(direction), material->alpha));
-    diffuse = lightRay.dotProd(normal) * material->kd;
+
+    diffuse = lightRay.dotProd(normal) * material->kd; // Componente difusa
+    specular = (material->ks * pow(reflection.dotProd(direction), material->alpha)); // Componente specular
 
     if (normal.dotProd(lightRay) < 0 || specular < 0) specular = 0;
 
