@@ -31,7 +31,6 @@ class InfinitePlane : public Geometry {
         Vec3 p2;
         Vec3 p3;
         Vec3 normal;
-        double b, h;
     public:
         InfinitePlane(Vec3 p1, Vec3 p2, Vec3 p3);
         bool intersect(Ray& r, ObjectIntersection* info);
