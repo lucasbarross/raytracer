@@ -4,9 +4,6 @@ InfinitePlane::InfinitePlane(Vec3 p1, Vec3 p2, Vec3 p3) {
     this->p2 = p2;
     this->p3 = p3;
 
-    this->h = 20;
-    this->b = 30;
-
     this->normal = (p2 - p1).crossProd(p3 - p1).normalize();
 };
 
