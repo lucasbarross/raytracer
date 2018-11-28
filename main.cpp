@@ -89,6 +89,7 @@ int main() {
         for(int j = 0; j < width; j++){
             Ray r = camera.getRay(i, j, width, height);
             Vec3 color = scene.trace(r, 0);
+            color.print();
             image.setPixel(i, j, color);
         }
     }

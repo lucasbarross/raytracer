@@ -28,8 +28,9 @@ bool Triangle::intersect(Ray& r, ObjectIntersection* info) { // Möller-Trumbore
 
     if (v < 0 || u + v > 1) return false; 
  
-    double t = vavc.dotProd(qvec) * invDet; 
+    // if (this->normal.dotProd(r.getDirection().invert()) < 0) this->normal = this->normal.invert(); 
 
+    double t = vavc.dotProd(qvec) * invDet; 
     info->t = t;
     info->p = r.sample(t);
     info->n = this->normal;

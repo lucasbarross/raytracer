@@ -22,9 +22,9 @@ near=10
 
 #light
 
-positionX=16
-positionY=12
-positionZ=10
+positionX=30
+positionY=30
+positionZ=30
 colorR=255
 colorG=255
 colorB=255
@@ -45,7 +45,7 @@ colorG=1
 colorB=0.1
 
 id=1
-ke=0.5
+ke=0.2
 kd=0.45
 ks=0.1
 alpha=200
@@ -54,7 +54,7 @@ colorG=0
 colorB=0
 
 id=2
-ke=0.5
+ke=0.2
 kd=0.45
 ks=0.1
 alpha=100
@@ -63,7 +63,7 @@ colorG=1
 colorB=0
 
 id=3
-ke=0.5
+ke=0.2
 kd=0.45
 ks=0.1
 alpha=100
@@ -86,66 +86,6 @@ centerX=5
 centerY=2
 centerZ=3
 radius=3
-
-type=1
-materialId=1
-p1X=-3
-p1Y=0
-p1Z=0
-p2X=-3
-p2Y=1
-p2Z=0
-p3X=-3
-p3Y=0
-p3Z=1
-
-type=1
-materialId=1
-p1X=0
-p1Y=7
-p1Z=0
-p2X=1
-p2Y=7
-p2Z=0
-p3X=0
-p3Y=7
-p3Z=1
-
-type=1
-materialId=1
-p1X=-10
-p1Y=0
-p1Z=0
-p2X=-10
-p2Y=1
-p2Z=0
-p3X=-10
-p3Y=0
-p3Z=1
-
-type=1
-materialId=1
-p1X=10
-p1Y=0
-p1Z=0
-p2X=10
-p2Y=1
-p2Z=0
-p3X=10
-p3Y=0
-p3Z=1
-
-type=1
-materialId=1
-p1X=0
-p1Y=0
-p1Z=-4
-p2X=1
-p2Y=0
-p2Z=-4
-p3X=0
-p3Y=1
-p3Z=-4
 
 type=2
 materialId=2
