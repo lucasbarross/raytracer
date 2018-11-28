@@ -50,6 +50,7 @@ bool Scene::intersect(Ray& r, ObjectIntersection* info) {
 Vec3 Scene::trace(Ray& r, int recursionLevel){
     ObjectIntersection* objIntersection = new ObjectIntersection();
     
+    if(recursionLevel > 3) return this->background;
     // Testa se o objeto foi intersectado
     if (this->intersect(r, objIntersection)){
         Material* material = objIntersection->o->getMaterial();
@@ -62,8 +63,15 @@ Vec3 Scene::trace(Ray& r, int recursionLevel){
         // Calcula o raio de luz incidente no ponto de intersecção            
         Vec3 lightRayDirection = (light->position - objIntersection->p ).normalize();
         Ray lightRay (this->light->position, lightRayDirection.invert());
-
-
+        
+        if (normal.dotProd(r.getDirection().invert()) < 0) normal = normal.invert();
+        
+        if(material->reflective){
+            double a = direction.dotProd(normal);
+            Vec3 dr = normal.scale(2 * a) - direction;
+            Ray reflectionRay = Ray(objIntersection->p, dr);
+            color = color + trace(reflectionRay, recursionLevel+1).scale(0.8);
+        }
         // Testa se raio de luz intersecta objeto antes de chegar na luz     
         ObjectIntersection* info = new ObjectIntersection();
         if (this->intersect(lightRay, info)) {
@@ -74,7 +82,6 @@ Vec3 Scene::trace(Ray& r, int recursionLevel){
         }
         delete info;
 
-        if (normal.dotProd(r.getDirection().invert()) < 0) normal = normal.invert();
 
         return color + this->phong(material, direction, normal,lightRayDirection); 
     } else {

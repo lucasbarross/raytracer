@@ -30,7 +30,7 @@ Material* findMaterial(vector<Material*> materials, int id){
         } 
     }
 
-    return new Material(0, 0, 0,0, 100, Vec3(0.1,1,0.1));
+    return new Material(0, 0, 0,0, 100, 0, Vec3(0.1,1,0.1));
 }
 
 int main() {
@@ -64,7 +64,7 @@ int main() {
     for(int i = 0; i < materials.size(); i++) {
         map<string,double> materialOpt = materials[i];
         materialsObjects.push_back(new Material(materialOpt["id"], materialOpt["ke"], materialOpt["kd"], materialOpt["ks"], 
-                                   materialOpt["alpha"], Vec3(materialOpt["colorR"], materialOpt["colorG"], materialOpt["colorB"])));
+                                   materialOpt["alpha"], materialOpt["reflective"], Vec3(materialOpt["colorR"], materialOpt["colorG"], materialOpt["colorB"])));
     }
 
     for(int i = 0; i < objects.size(); i++){
@@ -89,7 +89,7 @@ int main() {
         for(int j = 0; j < width; j++){
             Ray r = camera.getRay(i, j, width, height);
             Vec3 color = scene.trace(r, 0);
-            color.print();
+            // color.print();
             image.setPixel(i, j, color);
         }
     }
