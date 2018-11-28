@@ -5,6 +5,9 @@
 !*.cpp
 !*.h
 !config.txt
+!pilha.txt
+!sombrinha.txt
+!diversos.txt
 !image.ppm
 
 # Unignore all dirs
