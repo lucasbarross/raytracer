@@ -16,7 +16,7 @@ class Image {
 		
 		void setPixel(int x, int y, const Vec3& color);
 		
-		void saveAsPBM();
+		void saveAsPBM(string fileName);
 };
 
 #include "Image.cpp"

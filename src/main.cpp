@@ -33,7 +33,9 @@ Material* findMaterial(vector<Material*> materials, int id){
 }
 
 int main(int argc, char **argv) {
-    Parser parser(argv[1]);
+    string fileName = argv[1];
+    Parser parser("tests/" + fileName + ".txt");
+    cout << "Generating ray tracing using " << argv[1] << ".txt" << endl;
     map<string, double> camOpt = parser.searchKey("camera")[0];
     map<string, double> imgOpt = parser.searchKey("image")[0];
     map<string, double> lightOpt = parser.searchKey("light")[0];
@@ -88,6 +90,6 @@ int main(int argc, char **argv) {
         }
     }
     
-    image.saveAsPBM();
+    image.saveAsPBM(fileName);
     return 0;
 }
