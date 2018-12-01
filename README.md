@@ -1,15 +1,15 @@
 # Ray Tracer
 Ray Tracer feito para a Disciplina de Processamento Gráfico, CIN UFPE 2018.2  
 Grupo:  
--Lucas Barros (lbam)  
--Rafael Mota (rma7)  
--Lúcio Mota (lfmm2)
+- Lucas Barros (lbam)
+- Lúcio Mota (lfmm2)
+- Rafael Mota (rma7) 
 
 ## Features
 O ray tracer consegue renderizar planos limitados (triângulos) e esferas.  
--Possui sombras.   
--Reflexão está incluida na branch reflection, mas não foi aperfeiçoada.   
--Refração não está incluída.  
+- Possui sombras.   
+- Reflexão está incluida na branch reflection, mas não foi aperfeiçoada.   
+- Refração não está incluída.  
 
 ## Arquivo de configuração
 
