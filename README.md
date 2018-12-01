@@ -36,7 +36,7 @@ bgB=50
 Isso se repete para cada uma das outras tags, cujas chaves necessárias podem ser encontradas nos arquivos já existentes na pasta tests.
 
 Cada material embaixo da tag #material possui uma chave "id", que identifica o material (cada id deve ser único para cada material).
-Cada objeto embaixo da tag #objects possui uma tag "materialId", que possui como valor o id do material que o objeto irá utilizar e uma tag "type", que pode assumir o valor "2" ou "1". Caso o type seja "1", aquele objeto terá a geometria de esfera, enquanto se o type for "2", o objeto terá a geometria de triângulo. Para cada tipo desse, as chaves e valores necessárias para cada um, muda.
+Cada objeto embaixo da tag #objects possui uma tag "materialId", que possui como valor o id do material que o objeto irá utilizar e uma tag "type", que pode assumir o valor "2" ou "1". Caso o type seja "1", aquele objeto terá a geometria de esfera, enquanto se o type for "2", o objeto terá a geometria de triângulo. Para cada tipo desse, as chaves e valores necessárias para cada um, mudam.
 
 Caso não tenha ficado claro como manipular o arquivo de configuração .txt, sugiro ver os exemplos contidos na pasta tests.
 
