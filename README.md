@@ -6,10 +6,10 @@ Grupo:
 -Lúcio Mota (lfmm2)
 
 ## Features
-O ray tracer consegue renderizar planos limitados (triângulos) e esferas.
--Possui sombras. 
--Reflexão está incluida na branch reflection, mas não foi aperfeiçoada. 
--Refração não está incluída.
+O ray tracer consegue renderizar planos limitados (triângulos) e esferas.  
+-Possui sombras.   
+-Reflexão está incluida na branch reflection, mas não foi aperfeiçoada.   
+-Refração não está incluída.  
 
 ## Arquivo de configuração
 
