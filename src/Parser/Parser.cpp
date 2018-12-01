@@ -6,6 +6,11 @@ vector<map<string, double> > Parser::searchKey(string key){
     ifstream file(this->file);
     string line;
     vector<map<string, double> > params;
+
+    if (!file) {
+        cout << "Could not open " << this->file << endl;
+        exit(1);
+    } 
     
     int current = 0;
     
@@ -13,10 +18,8 @@ vector<map<string, double> > Parser::searchKey(string key){
     params.push_back(firstMap);
     
     bool match = false;
-    
     while( getline(file, line) ) {
-        
-        if(line == "#" + key){
+        if(line == ("#" + key)){
             match = true;
             continue;
         } else if (line[0] == '#') {

@@ -25,19 +25,6 @@ class Sphere : public Geometry {
         Vec3 getPoint() override;
 };
 
-class InfinitePlane : public Geometry {
-    private: 
-        Vec3 p1;
-        Vec3 p2;
-        Vec3 p3;
-        Vec3 normal;
-    public:
-        InfinitePlane(Vec3 p1, Vec3 p2, Vec3 p3);
-        bool intersect(Ray& r, ObjectIntersection* info);
-        Vec3 getPoint() override;
-        Vec3 getNormal();
-};
-
 class Triangle : public Geometry {
     private: 
         Vec3 a;
@@ -53,5 +40,4 @@ class Triangle : public Geometry {
 
 
 #include "Sphere.cpp"
-#include "Plane.cpp"
 #include "Triangle.cpp"

@@ -105,5 +105,5 @@ double Vec3::getZ() {
 }
 
 void Vec3::print() {
-    cout << "(" << this->x << ", " << this->y << ", " << this->z << ")" << endl;
+    printf("(%.1f,%.1f,%.1f)\n", this->x, this->y, this->z);
 }

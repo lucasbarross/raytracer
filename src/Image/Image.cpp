@@ -20,8 +20,9 @@ void Image::setPixel(int x, int y, const Vec3& color){
     this->buffer[x][y] = color;
 };
 
-void Image::saveAsPBM(){
-    FILE *f = fopen("image.ppm", "w");
+void Image::saveAsPBM(string fileName){
+    string fileNameFull = "images/" + fileName + ".ppm"; 
+    FILE *f = fopen(fileNameFull.c_str(), "w");
     fprintf(f, "P3\n%d %d\n%d\n", this->width, this->height, 255); 
     for (int i=0; i< this->height; i++) {
         for (int j=0; j < this->width; j++) {

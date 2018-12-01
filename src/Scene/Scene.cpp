@@ -1,4 +1,4 @@
-Scene::Scene(Light* light, Vec3 background, double ka){
+Scene::Scene(Light* light, Vec3 background){
     this->light = light;
     this->background = background;
 }

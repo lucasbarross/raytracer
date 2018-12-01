@@ -8,7 +8,6 @@
 
 const double EPSILON = 0.001;
 
-#include "util.cpp"
 #include "Vec3/Vec3.h"
 #include "Image/Image.h"
 #include "Ray/Ray.h"
@@ -33,16 +32,16 @@ Material* findMaterial(vector<Material*> materials, int id){
     return new Material(0, 0, 0,0, 100, Vec3(0.1,1,0.1));
 }
 
-int main() {
-    Parser parser("config.txt");
+int main(int argc, char **argv) {
+    string fileName = argv[1];
+    Parser parser("tests/" + fileName + ".txt");
+    cout << "Generating ray tracing using " << argv[1] << ".txt" << endl;
     map<string, double> camOpt = parser.searchKey("camera")[0];
     map<string, double> imgOpt = parser.searchKey("image")[0];
-    map<string, double> sceneOpt = parser.searchKey("scene")[0];
     map<string, double> lightOpt = parser.searchKey("light")[0];
     vector<map<string, double> > materials = parser.searchKey("materials");
     vector<map<string, double> > objects = parser.searchKey("objects");
     // para acessar: cameraOptions["positionX"], cameraOptions["positionY"] e assim por diante, como definido no config.txt
-
     int width = imgOpt["width"], height = imgOpt["height"];
     
     Camera camera(Vec3(camOpt["positionX"],camOpt["positionY"],camOpt["positionZ"]), 
@@ -55,7 +54,7 @@ int main() {
     
     Vec3 background = Vec3(imgOpt["bgR"], imgOpt["bgG"], imgOpt["bgB"]);
     
-    Scene scene(light, background, sceneOpt["ka"]);
+    Scene scene(light, background);
     Image image(width, height);
     
     vector<Material*> materialsObjects;
@@ -72,11 +71,8 @@ int main() {
         
         Geometry* geometry;
         Material* material = findMaterial(materialsObjects, objectsOpt["materialId"]);
-        if(objectsOpt["type"] == 1){
-            geometry = new InfinitePlane(Vec3(objectsOpt["p1X"], objectsOpt["p1Y"], objectsOpt["p1Z"]), 
-                                 Vec3(objectsOpt["p2X"],objectsOpt["p2Y"], objectsOpt["p2Z"]),
-                                 Vec3(objectsOpt["p3X"], objectsOpt["p3Y"], objectsOpt["p3Z"]));
-        }else if(objectsOpt["type"]==2){
+
+        if(objectsOpt["type"]==2){
             geometry = new Triangle(Vec3(objectsOpt["aX"],objectsOpt["aY"],objectsOpt["aZ"]), Vec3(objectsOpt["bX"],objectsOpt["bY"],objectsOpt["bZ"]), Vec3(objectsOpt["cX"],objectsOpt["cY"],objectsOpt["cZ"]));
         } else{
             geometry = new Sphere(Vec3(objectsOpt["centerX"], objectsOpt["centerY"], objectsOpt["centerZ"]), objectsOpt["radius"]);
@@ -84,16 +80,16 @@ int main() {
 
         scene.add(new Object(geometry, material));
     }
-    
+
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             Ray r = camera.getRay(i, j, width, height);
             Vec3 color = scene.trace(r, 0);
-            color.print();
+            //color.print();
             image.setPixel(i, j, color);
         }
     }
     
-    image.saveAsPBM();
+    image.saveAsPBM(fileName);
     return 0;
 }
