@@ -16,22 +16,22 @@ O ray tracer consegue renderizar planos limitados (triângulos) e esferas.
 O ray tracer aceita arquivos de configuração em txt para manipular câmera, a imagem, a cena e seus objetos.
 Para criar um arquivo de configuração, crie um .txt na pasta *tests* com o nome que quiser (esse nome será o nome do arquivo de imagem).
 
-Um arquivo .txt de configuração aceita as tags: 
-"#image"
-"#camera"
-"#light"
-"#scene"
-"#materials"
-"#objects"
+Um arquivo .txt de configuração aceita as tags:  
+"#image"  
+"#camera"  
+"#light"  
+"#scene"  
+"#materials"  
+"#objects"  
 
 Em que a partir de cada tag, você especifica as configurações para tal elemento dessa tag utilizando pares de chaves e valores. Por exemplo, ao digitar a tag "#image" eu devo escrever, embaixo dessa tag, as configurações de width, height, e o R, G e B da cor do background.
 
-#scene
-width=800
-height=600
-bgR=50
-bgG=50
-bgB=50
+#scene  
+width=800  
+height=600  
+bgR=50  
+bgG=50  
+bgB=50  
 
 Isso se repete para cada uma das outras tags, cujas chaves necessárias podem ser encontradas nos arquivos já existentes na pasta tests.
 
