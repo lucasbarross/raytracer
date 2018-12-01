@@ -46,7 +46,7 @@ Para gerar a imagem, primeiro compile o código c++
 
 g++ src/main.cpp -o rt
 
-e execute o executável gerado digitando o nome do arquivo .txt que irá configurar a imagem e que se encontra na pasta *tests*,
+e execute o executável gerado digitando o nome do arquivo .txt que irá configurar a imagem (que deve estar na pasta *tests*)
 
 ./rt configDefault
 
