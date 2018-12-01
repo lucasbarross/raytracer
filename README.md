@@ -50,4 +50,4 @@ e execute o executável gerado digitando o nome do arquivo .txt que irá configu
 
 > ./rt configDefault
 
-Quando o algoritmo terminar, sua imagem deve aparecer na pasta "images", onde estão todas as imagens para os .txt de exemplo.
+Quando o algoritmo terminar, sua imagem deve aparecer na pasta "images", onde estão todas as imagens geradas pelos .txt de exemplo.
