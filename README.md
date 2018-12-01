@@ -44,10 +44,10 @@ Caso não tenha ficado claro como manipular o arquivo de configuração .txt, su
 
 Para gerar a imagem, primeiro compile o código c++
 
-g++ src/main.cpp -o rt
+> g++ src/main.cpp -o rt
 
 e execute o executável gerado digitando o nome do arquivo .txt que irá configurar a imagem (que deve estar na pasta *tests*)
 
-./rt configDefault
+> ./rt configDefault
 
 Quando o algoritmo terminar, sua imagem deve aparecer na pasta "images", onde estão todas as imagens para os .txt de exemplo.
