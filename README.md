@@ -1,8 +1,8 @@
 # Ray Tracer
-Ray Tracer feito para a Disciplina de Processamento Gráfico, CIN UFPE 2018.2
-Grupo:
--Lucas Barros (lbam)
--Rafael Mota (rma7)
+Ray Tracer feito para a Disciplina de Processamento Gráfico, CIN UFPE 2018.2  
+Grupo:  
+-Lucas Barros (lbam)  
+-Rafael Mota (rma7)  
 -Lúcio Mota (lfmm2)
 
 ## Features
