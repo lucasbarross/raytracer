@@ -1,5 +1,7 @@
 # Ray Tracer
-Ray Tracer feito para a Disciplina de Processamento Gráfico, CIN UFPE 2018.2  
+![alt text](https://raw.githubusercontent.com/lucasbarross/raytracer/master/configPilha.jpg)
+
+Ray Tracer feito para a Disciplina de Processamento Gráfico, CIN UFPE 2018.2
 Grupo:  
 - Lucas Barros (lbam)
 - Lúcio Mota (lfmm2)
